@@ -12,7 +12,7 @@ import com.zaxxer.hikari.HikariDataSource;
 @Configuration
 public class DatabaseConfig {
 
-	@Value("${postgres://gqhgjalxfmqfnj:b5b57fad8ecbe6208e92d25b219e10eb808cb86e4abffd5449a901d2832386cc@ec2-3-215-41-107.compute-1.amazonaws.com:5432/dabkol4sarbsqh}")
+	@Value("${postgres://zerfwwntxwgkro:c9f690ef3727e48acba7bd939c64b45d6c8f60806165b433e2d2bc94aaac6aea@ec2-3-230-106-126.compute-1.amazonaws.com:5432/dc13l0ts7kb4ci}")
 	private String dbUrl;
 
 	@Bean
