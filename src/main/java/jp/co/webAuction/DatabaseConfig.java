@@ -12,7 +12,7 @@ import com.zaxxer.hikari.HikariDataSource;
 @Configuration
 public class DatabaseConfig {
 
-	@Value("${spring.datasource.url}")
+	@Value("${postgres://gqhgjalxfmqfnj:b5b57fad8ecbe6208e92d25b219e10eb808cb86e4abffd5449a901d2832386cc@ec2-3-215-41-107.compute-1.amazonaws.com:5432/dabkol4sarbsqh}")
 	private String dbUrl;
 
 	@Bean
