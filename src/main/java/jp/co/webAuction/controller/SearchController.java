@@ -36,7 +36,7 @@ public class SearchController {
 	@Autowired
 	private MenuDao menuDao;
 
-	private String errorMessage = "ƒƒOƒCƒ“‚µ‚È‚¢‚Æ‚±‚Ì‹@”\‚Íg‚¦‚Ü‚¹‚ñ";
+	private String errorMessage = "";
 
 	@RequestMapping(value = "/searchResult", method = RequestMethod.GET)
 	public String searchResult(@ModelAttribute("product") ProductForm productForm, Model model,
@@ -96,7 +96,7 @@ public class SearchController {
 
 		favoriteDao.favoriteSearch(user, request);
 
-		request.setAttribute("registrationSuccessful", "“o˜^‚É¬Œ÷‚µ‚Ü‚µ‚½I");
+		request.setAttribute("registrationSuccessful", "");
 
 		return "searchResult/searchResult";
 
@@ -110,7 +110,7 @@ public class SearchController {
 		User user = (User) session.getAttribute("user");
 		PurchaseDisplay purchaseDisplay = searchDao.productInformation(productId);
 
-		//user‚ªƒƒOƒCƒ“‚µ‚Ä‚¢‚È‚©‚Á‚½ê‡‚Í—Dƒ{ƒ^ƒ“‚ğ•\¦‚³‚¹‚éB
+		//userï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡ï¿½Í—ï¿½ï¿½Dï¿½{ï¿½^ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
 		if (user == null) {
 			purchaseDisplay.setSeller(0);
 			purchaseDisplay.setBuyer(0);

@@ -20,6 +20,7 @@ public class AdminController {
 	@Autowired
 	AdminDao adminDao;
 
+
 	@Autowired
 	SearchDao searchDao;
 
@@ -47,7 +48,7 @@ public class AdminController {
 
 	}
 
-	/*ŠÇ—Ò‰æ–Ê*/
+	/*ï¿½Ç—ï¿½ï¿½Ò‰ï¿½ï¿½*/
 
 	@RequestMapping(value = "/AdminProduct", params = "delete")
 	public String adminProducDelete(@ModelAttribute("product") ProductForm productForm, Model model) {
