@@ -26,17 +26,17 @@
 		<!-- 追加 ここから-->
 
 
-		<!-- <dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
-		</dependency> -->
+		</dependency>
 
 
-		<!-- <dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
- -->
+
 		<!-- 追加ここまで -->
 
 		<dependency>
