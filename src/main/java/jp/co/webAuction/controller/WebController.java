@@ -26,7 +26,7 @@ public class WebController {
 	@Autowired
 	FavoriteDao favoriteDao;
 
-	@RequestMapping(value = { "/homePage", "/index" })
+	@RequestMapping(value = { "/homePage", "/index" , "/" })
 	public String homeIndex(Model model,
 			HttpServletRequest request) {
 
