@@ -14,7 +14,7 @@ public class SpringHerokuTestApplication {
     @RequestMapping("/")
     @ResponseBody
     String home() {
-      return "Hello World! Tset eclipse ABC";
+      return "Hello World! Tset eclipse pom";
     }
 
     public static void main(String[] args) {
