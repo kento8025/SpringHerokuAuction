@@ -1,4 +1,4 @@
-package jp.co.webAuction;
+package jp.co.webAuction.config;
 
 import javax.sql.DataSource;
 
