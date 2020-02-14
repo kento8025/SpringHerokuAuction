@@ -16,11 +16,11 @@ import jp.co.webAuction.db.entity.TradeDao;
 @Repository
 public class PgTradeDao implements TradeDao {
 
+	@Autowired
+	NamedParameterJdbcTemplate jdbcTemplateError;
+
 	private final String INSERT_SUSCCEFUL_DID = "INSERT INTO successful_bid (product_id , user_id , contract_price , trade_status , trade_dete) "
 			+ "VALUES(:product_id , :user_id , :contract_price , :trade_status ,now())";
-
-	@Autowired
-	NamedParameterJdbcTemplate jdbcTemplate;
 
 	@Override
 	public void register(TradeForm tradeForm) {
@@ -32,7 +32,7 @@ public class PgTradeDao implements TradeDao {
 		param.addValue("contract_price", tradeForm.getContractPrice());
 		param.addValue("trade_status", 1);
 
-		jdbcTemplate.update(INSERT_SUSCCEFUL_DID, param);
+		jdbcTemplateError.update(INSERT_SUSCCEFUL_DID, param);
 
 	}
 
@@ -45,7 +45,7 @@ public class PgTradeDao implements TradeDao {
 
 		param.addValue("id", productId);
 
-		jdbcTemplate.update(sql, param);
+		jdbcTemplateError.update(sql, param);
 
 	}
 
@@ -58,7 +58,7 @@ public class PgTradeDao implements TradeDao {
 
 		param.addValue("id", id);
 
-		jdbcTemplate.update(sql, param);
+		jdbcTemplateError.update(sql, param);
 
 
 	}
@@ -70,7 +70,7 @@ public class PgTradeDao implements TradeDao {
 
 		String sql = "UPDATE Product SET should_show = 3  WHERE id = :productId  ";
 		param.addValue("productId", productId);
-		jdbcTemplate.update(sql, param);
+		jdbcTemplateError.update(sql, param);
 
 
 		sql = "SELECT *  FROM successful_bid  WHERE trade_status = 1 AND product_id = :productId  GROUP BY id ORDER BY contract_price DESC";
@@ -78,7 +78,7 @@ public class PgTradeDao implements TradeDao {
 
 		List<SuccessfulDid> successfulDid =  new ArrayList<>();
 
-		successfulDid = jdbcTemplate.query(
+		successfulDid = jdbcTemplateError.query(
 				sql,
 				param,
 				new BeanPropertyRowMapper<SuccessfulDid>(SuccessfulDid.class));
@@ -88,7 +88,7 @@ public class PgTradeDao implements TradeDao {
 		param.addValue("productId", productId);
 		param.addValue("tradeId", successfulDid.get(0).getId());
 
-		jdbcTemplate.update(sql, param);
+		jdbcTemplateError.update(sql, param);
 
 	}
 
