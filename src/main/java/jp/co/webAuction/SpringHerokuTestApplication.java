@@ -1,4 +1,4 @@
-package jp.co.example;
+package jp.co.webAuction;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,7 +14,7 @@ public class SpringHerokuTestApplication {
     @RequestMapping("/")
     @ResponseBody
     String home() {
-      return "Hello World! Tset eclipse pom filter’Ç‰Á";
+      return "Hello World! Tset eclipse pom filter ";
     }
 
     public static void main(String[] args) {
