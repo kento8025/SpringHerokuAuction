@@ -5,7 +5,7 @@ public class Favorite {
 	private int id;
 	private int userId;
 	private Integer RegistrNumber;
-	private String favoriteName = "–¢“o˜^";
+	private String favoriteName = "æœªç™»éŒ²";
 	private String favoriteUrl;
 
 	public int getId() {

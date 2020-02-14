@@ -39,7 +39,7 @@ public class ProductController {
 	@Autowired
 	private FavoriteDao favoriteDao;
 
-	private String errorMessage = "ƒƒOƒCƒ“‚µ‚È‚¢‚Æ‚±‚Ì‹@”\‚Íg‚¦‚Ü‚¹‚ñ";
+	private String errorMessage = "ãƒ­ã‚°ã‚¤ãƒ³ã—ãªã„ã¨ã“ã®æ©Ÿèƒ½ã¯ä½¿ãˆã¾ã›ã‚“";
 
 	@RequestMapping("/ProductRegister")
 	public String productRegister(ProductForm productForm, Model model, HttpServletRequest request) {
@@ -77,7 +77,7 @@ public class ProductController {
 		if (bindingResult.hasErrors()) {
 
 			if (part.getSize() == 0) {
-				request.setAttribute("imgError", "‰æ‘œƒtƒ@ƒCƒ‹‚ğ“Y•t‚µ‚Ä‚­‚¾‚³‚¢");
+				request.setAttribute("imgError", "ç”»åƒãƒ•ã‚¡ã‚¤ãƒ«ã‚’æ·»ä»˜ã—ã¦ãã ã•ã„");
 			}
 
 			return "product/exhibit/productRegister";
@@ -86,33 +86,33 @@ public class ProductController {
 
 		model.addAttribute("product", productForm);
 
-		//â‘ÎƒpƒX‚Ìw’è
+		//çµ¶å¯¾ãƒ‘ã‚¹ã®æŒ‡å®š
 		final String ABSOLUTE_PATH = new File("").getAbsoluteFile().getPath()
 				+ "\\src\\main\\webapp\\WebContent\\ProductImg";
 
 		HttpSession session = request.getSession(true);
 		User user = (User) session.getAttribute("user");
 
-		//ƒtƒHƒ‹ƒ_[‚ª‚ ‚é‚©‚Ç‚¤‚©Šm”FB
-		//‚È‚¯‚ê‚Îì¬‚·‚éB
+		//ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼ãŒã‚ã‚‹ã‹ã©ã†ã‹ç¢ºèªã€‚
+		//ãªã‘ã‚Œã°ä½œæˆã™ã‚‹ã€‚
 
 		File folder = new File(ABSOLUTE_PATH + "/" + user.getId());
 
 		if (folder.exists()) {
 
-			System.out.println("ƒtƒHƒ‹ƒ_‚ª‚ ‚è‚Ü‚µ‚½");
+			System.out.println("ãƒ•ã‚©ãƒ«ãƒ€ãŒã‚ã‚Šã¾ã—ãŸ");
 
 		} else {
 
-			System.out.println("ƒtƒHƒ‹ƒ_‚ª‘¶İ‚µ‚Ü‚¹‚ñ");
+			System.out.println("ãƒ•ã‚©ãƒ«ãƒ€ãŒå­˜åœ¨ã—ã¾ã›ã‚“");
 
-			// â‘ÎƒpƒX‚Åì¬
+			// çµ¶å¯¾ãƒ‘ã‚¹ã§ä½œæˆ
 			File file1 = new File(ABSOLUTE_PATH + "/" + user.getId());
 
 			if (file1.mkdir()) {
-				System.out.println("ƒtƒHƒ‹ƒ_‚Ìì¬‚É¬Œ÷‚µ‚Ü‚µ‚½");
+				System.out.println("ãƒ•ã‚©ãƒ«ãƒ€ã®ä½œæˆã«æˆåŠŸã—ã¾ã—ãŸ");
 			} else {
-				System.out.println("ƒtƒHƒ‹ƒ_‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½");
+				System.out.println("ãƒ•ã‚©ãƒ«ãƒ€ã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸ");
 			}
 		}
 

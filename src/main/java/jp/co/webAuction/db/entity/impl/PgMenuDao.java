@@ -66,7 +66,7 @@ public class PgMenuDao implements MenuDao {
 
 	private String SBSBJOIN = " " +
 			"LEFT JOIN " +
-			"(SELECT p.id , " + 
+			"(SELECT p.id , " +
 			"CASE  " +
 			"WHEN MAX(s.contract_price)  IS NULL THEN  MAX(p.price) " +
 			"ELSE MAX(s.contract_price)  " +
@@ -130,7 +130,7 @@ public class PgMenuDao implements MenuDao {
 				new BeanPropertyRowMapper<Product>(Product.class));
 	}
 
-	//ÉJÉeÉSÉäåüçı
+	//„Ç´„ÉÜ„Ç¥„É™Ê§úÁ¥¢
 	@Override
 	public List<Category> categorySearch() {
 

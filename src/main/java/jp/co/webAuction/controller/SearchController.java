@@ -36,7 +36,7 @@ public class SearchController {
 	@Autowired
 	private MenuDao menuDao;
 
-	private String errorMessage = "";
+	private String errorMessage = "ログインしないとこの機能は使えません";
 
 	@RequestMapping(value = "/searchResult", method = RequestMethod.GET)
 	public String searchResult(@ModelAttribute("product") ProductForm productForm, Model model,
@@ -96,7 +96,7 @@ public class SearchController {
 
 		favoriteDao.favoriteSearch(user, request);
 
-		request.setAttribute("registrationSuccessful", "");
+		request.setAttribute("registrationSuccessful", "登録に成功しました！");
 
 		return "searchResult/searchResult";
 
@@ -110,7 +110,7 @@ public class SearchController {
 		User user = (User) session.getAttribute("user");
 		PurchaseDisplay purchaseDisplay = searchDao.productInformation(productId);
 
-		//user�����O�C�����Ă��Ȃ������ꍇ�͗��D�{�^����\��������B
+		//userがログインしていなかった場合は落札ボタンを表示させる。
 		if (user == null) {
 			purchaseDisplay.setSeller(0);
 			purchaseDisplay.setBuyer(0);

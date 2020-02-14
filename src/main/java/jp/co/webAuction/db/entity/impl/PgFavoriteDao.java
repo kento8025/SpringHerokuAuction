@@ -61,7 +61,7 @@ public class PgFavoriteDao implements FavoriteDao {
 	@Override
 	public void favoriteSearch(User user, HttpServletRequest request) {
 
-		//ƒz[ƒ€‚Ì‚¨‹C‚É“ü‚è“o˜^”‚ª8‚È‚Ì‚Å‚»‚ê‚ğŒ³‚Éì¬
+		//ãƒ›ãƒ¼ãƒ ã®ãŠæ°—ã«å…¥ã‚Šç™»éŒ²æ•°ãŒ8ãªã®ã§ãã‚Œã‚’å…ƒã«ä½œæˆ
 
 		final int MAX_FAVORITE_BUTTON = 8;
 

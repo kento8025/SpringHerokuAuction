@@ -7,26 +7,26 @@ import java.util.Date;
 public class Product {
 
 	private int id;
-	private String productName; /*è§ïiñº*/
-	private String productImg; /*è§ïiâÊëú*/
-	private int categoryId; /*ÉJÉeÉSÉäId äOïîÉLÅ[éQè∆*/
-	private String categoryName; /*ÉJÉeÉSÉäÇÃñºëO*/
-	private String productStatus;/*èÛë‘*/
-	private String description;/*ê‡ñæ*/
-	private String postage;/*ëóóøïâíS*/
-	private String shippingOrigin;/*î≠ëóå≥*/
-	private String shipping_method;/*îzëóï˚ñ@*/
-	private int exhibition_period;/*èoïiä˙ä‘*/
-	private int price; /*âøäi*/
+	private String productName; /*ÂïÜÂìÅÂêç*/
+	private String productImg; /*ÂïÜÂìÅÁîªÂÉè*/
+	private int categoryId; /*„Ç´„ÉÜ„Ç¥„É™Id Â§ñÈÉ®„Ç≠„ÉºÂèÇÁÖß*/
+	private String categoryName; /*„Ç´„ÉÜ„Ç¥„É™„ÅÆÂêçÂâç*/
+	private String productStatus;/*Áä∂ÊÖã*/
+	private String description;/*Ë™¨Êòé*/
+	private String postage;/*ÈÄÅÊñôË≤†ÊãÖ*/
+	private String shippingOrigin;/*Áô∫ÈÄÅÂÖÉ*/
+	private String shipping_method;/*ÈÖçÈÄÅÊñπÊ≥ï*/
+	private int exhibition_period;/*Âá∫ÂìÅÊúüÈñì*/
+	private int price; /*‰æ°Ê†º*/
 
-	private String userName;/*èoïiÇµÇΩÉÜÅ[ÉUÅ[*/
-	private int count;/*óééDâÒêî*/
+	private String userName;/*Âá∫ÂìÅ„Åó„Åü„É¶„Éº„Ç∂„Éº*/
+	private int count;/*ËêΩÊú≠ÂõûÊï∞*/
 	private int highestbidprice;
 
-	private Date registration_dete;/*ìoò^ÇµÇΩì˙ït*/
+	private Date registration_dete;/*ÁôªÈå≤„Åó„ÅüÊó•‰ªò*/
 
-	private Calendar remainingTime = Calendar.getInstance();/*écÇËéûä‘*/
-	private SimpleDateFormat sdf = new SimpleDateFormat("MMåéddì˙ HHéûmmï™");
+	private Calendar remainingTime = Calendar.getInstance();/*ÊÆã„ÇäÊôÇÈñì*/
+	private SimpleDateFormat sdf = new SimpleDateFormat("MMÊúàddÊó• HHÊôÇmmÂàÜ");
 
 	public String getProductName() {
 		return productName;
@@ -63,7 +63,7 @@ public class Product {
 	public String getDescription() {
 
 		if (description.length() > 40) {
-			description = description.substring(0, 40) + "ÅcÅc";
+			description = description.substring(0, 40) + "‚Ä¶‚Ä¶";
 		}
 		return description;
 	}

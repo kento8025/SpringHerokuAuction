@@ -7,17 +7,17 @@ import java.util.Calendar;
 public class PurchaseDisplay {
 
 	private int primaryProductId;
-	private String productName; /*¤•i–¼*/
-	private String productImg; /*¤•i‰æ‘œ*/
-	private int categoryId; /*ƒJƒeƒSƒŠId ŠO•”ƒL[QÆ*/
-	private String categoryName; /*ƒJƒeƒSƒŠ‚Ì–¼‘O*/
-	private String productStatus;/*ó‘Ô*/
-	private String description;/*à–¾*/
-	private String postage;/*‘——¿•‰’S*/
-	private String shippingOrigin;/*”­‘—Œ³*/
-	private String shipping_method;/*”z‘—•û–@*/
-	private int exhibition_period;/*o•iŠúŠÔ*/
-	private int price; /*‰¿Ši*/
+	private String productName; /*å•†å“å*/
+	private String productImg; /*å•†å“ç”»åƒ*/
+	private int categoryId; /*ã‚«ãƒ†ã‚´ãƒªId å¤–éƒ¨ã‚­ãƒ¼å‚ç…§*/
+	private String categoryName; /*ã‚«ãƒ†ã‚´ãƒªã®åå‰*/
+	private String productStatus;/*çŠ¶æ…‹*/
+	private String description;/*èª¬æ˜*/
+	private String postage;/*é€æ–™è² æ‹…*/
+	private String shippingOrigin;/*ç™ºé€å…ƒ*/
+	private String shipping_method;/*é…é€æ–¹æ³•*/
+	private int exhibition_period;/*å‡ºå“æœŸé–“*/
+	private int price; /*ä¾¡æ ¼*/
 
 	private int primaryUserId;
 	private String userName;
@@ -32,18 +32,18 @@ public class PurchaseDisplay {
 	private Date registrationDate;
 	private Date birthday;
 
-	private Integer seller;//o•iÒ‚ÌID
-	private Integer buyer;//w“üÒ‚ÌID
+	private Integer seller;//å‡ºå“è€…ã®ID
+	private Integer buyer;//è³¼å…¥è€…ã®ID
 
-	private Integer trade;//æˆøID
+	private Integer trade;//å–å¼•ID
 
-	private int count;/*—D‰ñ”*/
+	private int count;/*è½æœ­å›æ•°*/
 	private int highestbidprice;
 
-	private Date registration_dete;/*“o˜^‚µ‚½“ú•t*/
+	private Date registration_dete;/*ç™»éŒ²ã—ãŸæ—¥ä»˜*/
 
-	private Calendar remainingTime = Calendar.getInstance();/*c‚èŠÔ*/
-	private SimpleDateFormat sdf = new SimpleDateFormat("MMŒdd“ú HHmm•ª");
+	private Calendar remainingTime = Calendar.getInstance();/*æ®‹ã‚Šæ™‚é–“*/
+	private SimpleDateFormat sdf = new SimpleDateFormat("MMæœˆddæ—¥ HHæ™‚mmåˆ†");
 
 	public PurchaseDisplay() {
 

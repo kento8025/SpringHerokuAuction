@@ -8,7 +8,7 @@ import javax.validation.constraints.Pattern;
 
 public class UserForm {
 
-	private int id;//ƒe[ƒuƒ‹‚Ìƒvƒ‰ƒCƒ}ƒŠ[ƒL[‚ğŠi”[
+	private int id;//ãƒ†ãƒ¼ãƒ–ãƒ«ã®ãƒ—ãƒ©ã‚¤ãƒãƒªãƒ¼ã‚­ãƒ¼ã‚’æ ¼ç´
 
 	@NotBlank
 	private String userName;
@@ -22,17 +22,17 @@ public class UserForm {
 	@NotBlank
 	private String day;
 
-	@NotBlank(message = "«•Ê‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢B")
+	@NotBlank(message = "æ€§åˆ¥ã‚’é¸æŠã—ã¦ãã ã•ã„ã€‚")
 	private String manOrWoman;
 
-	@Email(message = "ƒ[ƒ‹ƒAƒhƒŒƒX‚ª•s³‚Å‚·B")
+	@Email(message = "ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹ãŒä¸æ­£ã§ã™ã€‚")
 	@NotBlank
 	private String mail;
 
 	@NotBlank
 	private String userId;
 
-	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])[0-9a-z\\-]{8,16}$", message = "ƒpƒXƒ[ƒh‚Í”¼Šp‰p¬•¶š‚Æ”š‚ğ‘g‚İ‡‚í‚¹‚½8•¶šˆÈã")
+	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])[0-9a-z\\-]{8,16}$", message = "ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã¯åŠè§’è‹±å°æ–‡å­—ã¨æ•°å­—ã‚’çµ„ã¿åˆã‚ã›ãŸ8æ–‡å­—ä»¥ä¸Š")
 	private String passWord;
 
 	private int userRank;

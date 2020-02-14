@@ -5,38 +5,38 @@ import javax.validation.constraints.NotNull;
 
 public class ProductForm {
 
-	private int id;/*ƒvƒ‰ƒCƒ}ƒŠ[ƒL[‚ğŠi”[*/
+	private int id;/*ãƒ—ãƒ©ã‚¤ãƒãƒªãƒ¼ã‚­ãƒ¼ã‚’æ ¼ç´*/
 
 	@NotBlank
-	private String productName; /*¤•i–¼*/
+	private String productName; /*å•†å“å*/
 
-	private String productImg; /*¤•i‰æ‘œ*/
+	private String productImg; /*å•†å“ç”»åƒ*/
 
-	private int categoryId; /*ƒJƒeƒSƒŠId ŠO•”ƒL[QÆ*/
+	private int categoryId; /*ã‚«ãƒ†ã‚´ãƒªId å¤–éƒ¨ã‚­ãƒ¼å‚ç…§*/
 
-	@NotBlank(message="ƒJƒeƒSƒŠ‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢B")
-	private String categoryName; /*ƒJƒeƒSƒŠ‚Ì–¼‘O*/
+	@NotBlank(message="ã‚«ãƒ†ã‚´ãƒªã‚’é¸æŠã—ã¦ãã ã•ã„ã€‚")
+	private String categoryName; /*ã‚«ãƒ†ã‚´ãƒªã®åå‰*/
 
-	@NotBlank(message="¤•i‚Ìó‘Ô‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢B")
-	private String productStatus;/*ó‘Ô*/
+	@NotBlank(message="å•†å“ã®çŠ¶æ…‹ã‚’é¸æŠã—ã¦ãã ã•ã„ã€‚")
+	private String productStatus;/*çŠ¶æ…‹*/
 
 	@NotBlank
-	private String description;/*à–¾*/
+	private String description;/*èª¬æ˜*/
 
-	@NotBlank(message="‘——¿•‰’SÒ‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢B")
-	private String postage;/*‘——¿•‰’S*/
+	@NotBlank(message="é€æ–™è² æ‹…è€…ã‚’é¸æŠã—ã¦ãã ã•ã„ã€‚")
+	private String postage;/*é€æ–™è² æ‹…*/
 
-	@NotBlank(message="”­‘—Œ³‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢B")
-	private String shippingOrigin;/*”­‘—Œ³*/
+	@NotBlank(message="ç™ºé€å…ƒã‚’é¸æŠã—ã¦ãã ã•ã„ã€‚")
+	private String shippingOrigin;/*ç™ºé€å…ƒ*/
 
-	@NotBlank(message="”z‘—•û–@‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢B")
-	private String shipping_method;/*”z‘—•û–@*/
-
-	@NotNull
-	private Integer exhibition_period;/*o•iŠúŠÔ*/
+	@NotBlank(message="é…é€æ–¹æ³•ã‚’é¸æŠã—ã¦ãã ã•ã„ã€‚")
+	private String shipping_method;/*é…é€æ–¹æ³•*/
 
 	@NotNull
-	private Integer price; /*‰¿Ši*/
+	private Integer exhibition_period;/*å‡ºå“æœŸé–“*/
+
+	@NotNull
+	private Integer price; /*ä¾¡æ ¼*/
 
 	public ProductForm() {
 

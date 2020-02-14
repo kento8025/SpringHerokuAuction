@@ -8,7 +8,7 @@ public class CheckDate {
 
 	    strDate = strDate.replace('-', '/');
 	    DateFormat format = DateFormat.getDateInstance();
-	    // “ú•t/‰ğÍ‚ğŒµ–§‚És‚¤‚©‚Ç‚¤‚©‚ğİ’è‚·‚éB
+	    // æ—¥ä»˜/æ™‚åˆ»è§£æã‚’å³å¯†ã«è¡Œã†ã‹ã©ã†ã‹ã‚’è¨­å®šã™ã‚‹ã€‚
 	    format.setLenient(false);
 	    try {
 	        format.parse(strDate);

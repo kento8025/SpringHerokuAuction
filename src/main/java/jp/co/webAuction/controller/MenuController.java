@@ -43,9 +43,9 @@ public class MenuController {
 	@Autowired
 	private FavoriteDao favoriteDao;
 
-	private String errorMessage = "ƒƒOƒCƒ“‚µ‚È‚¢‚Æ‚±‚Ì‹@”\‚Íg‚¦‚Ü‚¹‚ñ";
+	private String errorMessage = "ãƒ­ã‚°ã‚¤ãƒ³ã—ãªã„ã¨ã“ã®æ©Ÿèƒ½ã¯ä½¿ãˆã¾ã›ã‚“";
 
-	/*ƒƒjƒ…[‰æ–Ê {ƒ†[ƒUî•ñ•ÒW}*/
+	/*ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç”»é¢ {ãƒ¦ãƒ¼ã‚¶æƒ…å ±ç·¨é›†}*/
 	@RequestMapping("/userInformation")
 	public String userInformation(Model model, HttpServletRequest request) {
 
@@ -88,7 +88,7 @@ public class MenuController {
 		model.addAttribute("user", userForm);
 
 		if (!(CheckDate.checkDate(userForm.getYear() + "/" + userForm.getMonth() + "/" + userForm.getDay()))) {
-			request.setAttribute("birthdayError", "¶”NŒ“ú‚ª•s³‚Å‚·");
+			request.setAttribute("birthdayError", "ç”Ÿå¹´æœˆæ—¥ãŒä¸æ­£ã§ã™");
 			return "menu/user/userEdit";
 
 		}
@@ -101,7 +101,7 @@ public class MenuController {
 		return "menu/user/userUpdateDone";
 	}
 
-	/*ƒƒjƒ…[‰æ–Ê {—D’†@—D—š—ğ@o•i’†@o•i—š—ğ}*/
+	/*ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç”»é¢ {è½æœ­ä¸­ã€€è½æœ­å±¥æ­´ã€€å‡ºå“ä¸­ã€€å‡ºå“å±¥æ­´}*/
 	@RequestMapping("/menuSearch")
 	public String menuSearch(Model model, HttpServletRequest request, @RequestParam("menuCommand") String menuCommand) {
 
@@ -131,7 +131,7 @@ public class MenuController {
 		return "menu/menu";
 	}
 
-	/*¤•iw“üˆ—*/
+	/*å•†å“è³¼å…¥å‡¦ç†*/
 	@RequestMapping(value = "/trade", params = "SuccessfulDid", method = RequestMethod.POST)
 	public String successfulDid(@Validated @ModelAttribute("tradeForm") TradeForm tradeForm,
 			BindingResult bindingResult, Model model,
@@ -159,7 +159,7 @@ public class MenuController {
 		}
 
 		if (tradeForm.getPrice() > tradeForm.getContractPrice()) {
-			request.setAttribute("priceError", "o•i’†‚Ì’l’i‚æ‚è’á‚¢‰¿Ši‚Å‚Í—D‚Å‚«‚Ü‚¹‚ñ");
+			request.setAttribute("priceError", "å‡ºå“ä¸­ã®å€¤æ®µã‚ˆã‚Šä½ã„ä¾¡æ ¼ã§ã¯è½æœ­ã§ãã¾ã›ã‚“");
 			return "product/bid/exhibitPurchase";
 		} else {
 			tradeDao.register(tradeForm);
@@ -168,7 +168,7 @@ public class MenuController {
 
 	}
 
-	/*o•i‚µ‚½¤•i‚Ìæ‚èÁ‚µ*/
+	/*å‡ºå“ã—ãŸå•†å“ã®å–ã‚Šæ¶ˆã—*/
 	@RequestMapping(value = "/trade", params = "productCancel", method = RequestMethod.POST)
 	public String productCancel(@ModelAttribute("tradeForm") TradeForm tradeForm, Model model) {
 
@@ -178,7 +178,7 @@ public class MenuController {
 
 	}
 
-	/*¤•iw“üæ‚èÁ‚µ*/
+	/*å•†å“è³¼å…¥å–ã‚Šæ¶ˆã—*/
 	@RequestMapping(value = "/trade", params = "successFulDidCancel", method = RequestMethod.POST)
 	public String successFulDidCancel(@ModelAttribute("tradeForm") TradeForm tradeForm, Model model) {
 
@@ -187,7 +187,7 @@ public class MenuController {
 		return "menu/cancel/successFulDidCancel";
 	}
 
-	/*o•i‚µ‚½¤•i‚Ì‘¦”„‚è*/
+	/*å‡ºå“ã—ãŸå•†å“ã®å³å£²ã‚Š*/
 	@RequestMapping(value = "/trade", params = "promptDecision", method = RequestMethod.POST)
 	public String promptDecision(@ModelAttribute("tradeForm") TradeForm tradeForm, Model model) {
 

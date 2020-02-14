@@ -111,7 +111,7 @@ public class PgSearchDao implements SearchDao {
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
-	/*ŒŸõƒtƒH[ƒ€‚©‚ç‚Ì¤•iî•ñ*/
+	/*æ¤œç´¢ãƒ•ã‚©ãƒ¼ãƒ ã‹ã‚‰ã®å•†å“æƒ…å ±*/
 	@Override
 	public List<Product> productSearch(String productName, String category, String priceBetweenCommand,
 			String productStatus) {
@@ -144,7 +144,7 @@ public class PgSearchDao implements SearchDao {
 
 	}
 
-	/*¤•i‰æ‘œƒNƒŠƒbƒN‚Ìî•ñŒŸõ*/
+	/*å•†å“ç”»åƒã‚¯ãƒªãƒƒã‚¯ã®æƒ…å ±æ¤œç´¢*/
 	@Override
 	public PurchaseDisplay productInformation(int productId) {
 
@@ -173,7 +173,7 @@ public class PgSearchDao implements SearchDao {
 
 	}
 
-	/*“üD‰ñ”ƒJƒEƒ“ƒg*/
+	/*å…¥æœ­å›æ•°ã‚«ã‚¦ãƒ³ãƒˆ*/
 	public List<SuccessfulDidCount> successfulDidCountSearch(String productName, String category,
 			String priceBetweenCommand,
 			String productStatus) {
@@ -203,7 +203,7 @@ public class PgSearchDao implements SearchDao {
 
 	}
 
-	/*’l’i‚ğw’è*/
+	/*å€¤æ®µã‚’æŒ‡å®š*/
 	private void priceBetween(String priceBetweenCommand) {
 
 		if (priceBetweenCommand == null) {
@@ -234,7 +234,7 @@ public class PgSearchDao implements SearchDao {
 
 	}
 
-	/*WHERE•¶ì¬*/
+	/*WHEREæ–‡ä½œæˆ*/
 	private String whereSet(String productName, String category, String priceBetweenCommand, String productStatus) {
 
 		String sql = "";

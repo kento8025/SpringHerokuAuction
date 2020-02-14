@@ -48,7 +48,7 @@ public class AdminController {
 
 	}
 
-	/*�Ǘ��҉��*/
+	/*管理者画面*/
 
 	@RequestMapping(value = "/AdminProduct", params = "delete")
 	public String adminProducDelete(@ModelAttribute("product") ProductForm productForm, Model model) {

@@ -35,7 +35,7 @@ public class UserController {
 	@Autowired
 	private FavoriteDao favoriteDao;
 
-	/*ƒƒOƒCƒ“*/
+	/*ãƒ­ã‚°ã‚¤ãƒ³*/
 	@RequestMapping(value = "/loginCheck", params = "login", method = RequestMethod.POST)
 	public String login(@ModelAttribute("user") UserForm userForm, Model model, HttpServletRequest request) {
 
@@ -54,7 +54,7 @@ public class UserController {
 			return "home/homePage";
 
 		} else {
-			request.setAttribute("loginError", "ID‚Ü‚½‚ÍPASSWORD‚ªˆá‚¢‚Ü‚·");
+			request.setAttribute("loginError", "IDã¾ãŸã¯PASSWORDãŒé•ã„ã¾ã™");
 			User user = (User) session.getAttribute("user");
 			favoriteDao.favoriteSearch(user, request);
 
@@ -63,7 +63,7 @@ public class UserController {
 		}
 	}
 
-	/*ƒƒOƒAƒEƒg*/
+	/*ãƒ­ã‚°ã‚¢ã‚¦ãƒˆ*/
 	@RequestMapping(value = "/loginCheck", params = "logout", method = RequestMethod.POST)
 	public String logout(@ModelAttribute("user") UserForm userForm, Model model, HttpServletRequest request) {
 
@@ -81,7 +81,7 @@ public class UserController {
 
 	}
 
-	/*V‹K“o˜^*/
+	/*æ–°è¦ç™»éŒ²*/
 	@RequestMapping(value = "/loginCheck", params = "UserRegister", method = RequestMethod.POST)
 	public String userRegister(@ModelAttribute("user") UserForm userForm,
 			Model model) {
@@ -92,7 +92,7 @@ public class UserController {
 
 	}
 
-	/*Šm”F‰æ–Ê*/
+	/*ç¢ºèªç”»é¢*/
 	@RequestMapping(value = "/UserConfirmation", method = RequestMethod.POST)
 	public String userConfirmation(@Validated @ModelAttribute("user") UserForm userForm, BindingResult bindingResult,
 			Model model, HttpServletRequest request) {
@@ -100,7 +100,7 @@ public class UserController {
 		if (bindingResult.hasErrors()) {
 
 			if (!(CheckDate.checkDate(userForm.getYear()+ "/" + userForm.getMonth() + "/" + userForm.getDay()))) {
-				request.setAttribute("birthdayError", "¶”NŒ“ú‚ª•s³‚Å‚·");
+				request.setAttribute("birthdayError", "ç”Ÿå¹´æœˆæ—¥ãŒä¸æ­£ã§ã™");
 			}
 
 			return "login/userRegister";
@@ -108,7 +108,7 @@ public class UserController {
 		return "login/userConfirmation";
 	}
 
-	/*•ÒW‰æ–Ê*/
+	/*ç·¨é›†ç”»é¢*/
 	@RequestMapping(value = "/registration", params = "edit", method = RequestMethod.POST)
 	public String edit(@ModelAttribute("user") UserForm userForm, Model model) {
 
@@ -118,7 +118,7 @@ public class UserController {
 
 	}
 
-	/*“o˜^Š®—¹‰æ–Ê*/
+	/*ç™»éŒ²å®Œäº†ç”»é¢*/
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public String registration(@ModelAttribute("user") UserForm userForm, Model model) {
 
