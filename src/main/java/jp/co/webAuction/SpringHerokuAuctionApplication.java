@@ -13,7 +13,7 @@ public class SpringHerokuAuctionApplication {
 	@RequestMapping("/")
     @ResponseBody
     String home() {
-      return "Hello World!";
+      return "Hello World! JSP";
     }
 
 	public static void main(String[] args) {
