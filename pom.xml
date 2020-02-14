@@ -20,26 +20,57 @@
 
 	<dependencies>
 
-		<!-- 追加 -->
 
-		<!--成功-->
-		<dependency>
+
+
+		<!-- 追加 ここから-->
+
+
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
-		</dependency>
+		</dependency> -->
 
-		<!-- 成功 -->
-		<dependency>
+
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
-
-		<!-- 追加 -->
+ -->
+		<!-- 追加ここまで -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
+		<!--追加ここから-->
+
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+
+
+		<!--追加 ここまで-->
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -52,6 +83,10 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
+
+
+
 	</dependencies>
 
 	<build>
