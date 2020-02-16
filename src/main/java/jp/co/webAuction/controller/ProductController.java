@@ -89,14 +89,11 @@ public class ProductController {
 		//絶対パスの指定
 		/*final String ABSOLUTE_PATH = new File("").getAbsoluteFile().getPath()
 				+ "\\src\\main\\webapp\\WebContent\\ProductImg";*/
-
-		final String ABSOLUTE_PATH = "\\src\\main\\webapp\\WebContent\\ProductImg";
+		//RELATIVEPAtH
+		final String ABSOLUTE_PATH = new File("").getAbsoluteFile().getPath()
+				+ "/src/main/webapp/WebContent/ProductImg";
 
 		System.out.println("***********************");
-
-		String path = new File(".").getAbsoluteFile().getParent();
-        System.out.println(path);
-
 		System.out.println(ABSOLUTE_PATH);
 		System.out.println("***********************");
 
@@ -116,7 +113,7 @@ public class ProductController {
 
 			System.out.println("フォルダが存在しません");
 
-			// 絶対パスで作成
+			// 相対パスで作成
 			File file1 = new File(ABSOLUTE_PATH + "/" + user.getId());
 
 			if (file1.mkdir()) {
@@ -129,7 +126,7 @@ public class ProductController {
 		String name = this.getFileName(part);
 		part.write(ABSOLUTE_PATH + "/" + user.getId() + "/" + name);
 
-		productForm.setProductImg("\\WebContent\\ProductImg" + "/" + user.getId() + "/" + name);
+		productForm.setProductImg("/WebContent/ProductImg" + "/" + user.getId() + "/" + name);
 
 		return "product/exhibit/contentConfirmation";
 
