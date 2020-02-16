@@ -90,6 +90,10 @@ public class ProductController {
 		final String ABSOLUTE_PATH = new File("").getAbsoluteFile().getPath()
 				+ "\\src\\main\\webapp\\WebContent\\ProductImg";
 
+		System.out.println("***********************");
+		System.out.println(ABSOLUTE_PATH);
+		System.out.println("***********************");
+
 		HttpSession session = request.getSession(true);
 		User user = (User) session.getAttribute("user");
 
