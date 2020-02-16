@@ -87,8 +87,10 @@ public class ProductController {
 		model.addAttribute("product", productForm);
 
 		//絶対パスの指定
-		final String ABSOLUTE_PATH = new File("").getAbsoluteFile().getPath()
-				+ "\\src\\main\\webapp\\WebContent\\ProductImg";
+		/*final String ABSOLUTE_PATH = new File("").getAbsoluteFile().getPath()
+				+ "\\src\\main\\webapp\\WebContent\\ProductImg";*/
+
+		final String ABSOLUTE_PATH = "\\src\\main\\webapp\\WebContent\\ProductImg";
 
 		System.out.println("***********************");
 		System.out.println(ABSOLUTE_PATH);
