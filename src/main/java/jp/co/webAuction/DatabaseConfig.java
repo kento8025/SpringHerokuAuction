@@ -12,9 +12,9 @@ import com.zaxxer.hikari.HikariDataSource;
 @Configuration
 public class DatabaseConfig {
 
-  @Value("postgres://nxfaxdtavfgalh:234962a1f8d6b2f4198a38709adec44357f4207b94786d840a9711e0295eee7e@ec2-50-17-178-87.compute-1.amazonaws.com:5432/dea9d804tl2d36")
+  @Value("postgres://pnhflcvsxxzedg:aa11e5f17c5a334e9d8737545b2e9ef31b59d86a9eac9d2e6b921415ea1ed49d@ec2-184-72-235-159.compute-1.amazonaws.com:5432/da7hr1lh3vbjua")
   private String dbUrl;
-
+  //じぇちｊぎえあｊ
   @Bean
   public DataSource dataSource() {
       HikariConfig config = new HikariConfig();
