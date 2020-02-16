@@ -90,7 +90,7 @@ public class ProductController {
 		/*final String ABSOLUTE_PATH = new File("").getAbsoluteFile().getPath()
 				+ "\\src\\main\\webapp\\WebContent\\ProductImg";*/
 		//RELATIVEPAtH
-		final String ABSOLUTE_PATH = new File("").getAbsoluteFile().getPath()
+		final String ABSOLUTE_PATH = "../../../../"+new File("").getAbsoluteFile().getPath()
 				+ "/src/main/webapp/WebContent/ProductImg";
 
 		System.out.println("***********************");
@@ -113,7 +113,7 @@ public class ProductController {
 
 			System.out.println("フォルダが存在しません");
 
-			// 相対パスで作成
+			// 絶対パスで作成
 			File file1 = new File(ABSOLUTE_PATH + "/" + user.getId());
 
 			if (file1.mkdir()) {
