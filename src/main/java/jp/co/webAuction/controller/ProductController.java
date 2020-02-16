@@ -91,7 +91,7 @@ public class ProductController {
 				+ "\\src\\main\\webapp\\WebContent\\ProductImg";*/
 		//RELATIVEPAtH
 		final String ABSOLUTE_PATH = new File("").getAbsoluteFile().getPath()
-				+ "/src/main/webapp/WebContent/ProductImg";
+				+ "/SpringHerokuAuction/src/main/webapp/WebContent/ProductImg";
 
 		System.out.println("***********************");
 		System.out.println(ABSOLUTE_PATH);
