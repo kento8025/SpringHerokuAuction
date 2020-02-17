@@ -90,7 +90,10 @@ public class ProductController {
 		/*final String ABSOLUTE_PATH = new File("").getAbsoluteFile().getPath()
 				+ "\\src\\main\\webapp\\WebContent\\ProductImg";*/
 		//RELATIVEPAtH
-		final String ABSOLUTE_PATH = new File("").getAbsoluteFile().getPath();
+
+		final String ABSOLUTE_PATH = "/tmp";
+
+		//final String ABSOLUTE_PATH = new File("").getAbsoluteFile().getPath();
 		//	+ "/src/main/webapp/WebContent/ProductImg";
 
 		System.out.println("***********************");
