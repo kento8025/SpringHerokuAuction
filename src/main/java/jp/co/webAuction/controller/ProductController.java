@@ -129,6 +129,8 @@ public class ProductController {
 		productForm.setProductImg(
 				"https://herokuauction8025.herokuapp.com/" + ABSOLUTE_PATH + "/" + user.getId() + "/" + name);
 
+		System.out.println(ABSOLUTE_PATH + "/" + user.getId() + "/" + name);
+
 		return "product/exhibit/contentConfirmation";
 
 	}
