@@ -91,7 +91,7 @@ public class ProductController {
 				+ "\\src\\main\\webapp\\WebContent\\ProductImg";*/
 		//RELATIVEPAtH
 
-		final String ABSOLUTE_PATH = "/tmp";
+		final String ABSOLUTE_PATH = "tmp";
 
 		//final String ABSOLUTE_PATH = new File("").getAbsoluteFile().getPath();
 		//	+ "/src/main/webapp/WebContent/ProductImg";
@@ -128,6 +128,8 @@ public class ProductController {
 
 		String name = this.getFileName(part);
 		part.write(ABSOLUTE_PATH + "/" + user.getId() + "/" + name);
+
+
 
 		productForm.setProductImg(
 				"https://herokuauction8025.herokuapp.com/" + ABSOLUTE_PATH + "/" + user.getId() + "/" + name);
