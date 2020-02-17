@@ -13,7 +13,7 @@
 <head>
 
 <meta charset="UTF-8">
-<link rel="stylesheet" href="WebContent/css/exhibit/productConfirmation.css">
+<link rel="stylesheet" href="WebContent/css/product/exhibit/productConfirmation.css">
 <title></title>
 
 </head>
