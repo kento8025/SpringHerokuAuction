@@ -130,10 +130,10 @@ public class ProductController {
 		part.write(ABSOLUTE_PATH + "/" + user.getId() + "/" + name);
 
 		productForm.setProductImg(
-				"https://herokuauction8025.herokuapp.com/" + ABSOLUTE_PATH + "/" + user.getId() + "/" + name);
+				"https://herokuauction8025.herokuapp.com/" + "WebContent/ProductImg" + "/" + user.getId() + "/" + name);
 
 		System.out.println("***********************");
-		System.out.println(ABSOLUTE_PATH + "/" + user.getId() + "/" + name);
+		System.out.println("WebContent/ProductImg" + "/" + user.getId() + "/" + name);
 		System.out.println("***********************");
 
 		return "product/exhibit/contentConfirmation";
