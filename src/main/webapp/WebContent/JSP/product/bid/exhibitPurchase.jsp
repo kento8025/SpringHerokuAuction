@@ -126,6 +126,8 @@
 
 					</c:when>
 
+
+
 					<c:when test="${sessionScope.user.id eq purchaseDisplay.buyer}">
 
 						<input type="hidden"
@@ -135,6 +137,8 @@
 							name="successFulDidCancel">落札の取り消し</form:button>
 
 					</c:when>
+
+
 
 
 					<c:otherwise>

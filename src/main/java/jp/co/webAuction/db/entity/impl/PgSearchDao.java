@@ -81,7 +81,7 @@ public class PgSearchDao implements SearchDao {
             "AND (trade_status IS NULL OR trade_status != 3 )  AND should_show = 1 ";
 
     private final String INFORMATION_WHERE = "" +
-            "WHERE p.id = :p.id  AND should_show = 1 ";
+            "WHERE p.id = :p.id  AND (trade_status IS NULL OR trade_status = 1 ) AND should_show = 1 ";
 
     private final String GROUP_BY = " GROUP BY  p.id , s.trade_status , u.user_name  ";
 
