@@ -114,6 +114,7 @@ public class PgSearchDao implements SearchDao {
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     /*検索フォームからの商品情報*/
+
     @Override
     public List<Product> productSearch(String productName, String category, String priceBetweenCommand,
             String productStatus, Integer limt) {
