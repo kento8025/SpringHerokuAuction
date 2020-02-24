@@ -102,9 +102,6 @@ public class UserController {
 
 			if (!(CheckDate.checkDate(userForm.getYear() + "/" + userForm.getMonth() + "/" + userForm.getDay()))) {
 				request.setAttribute("birthdayError", "生年月日が不正です");
-				System.out.println(userForm.getYear() + "/" + userForm.getMonth() + "/" + userForm.getDay());
-				System.out.println(CheckDate.checkDate(userForm.getYear() + "/" + userForm.getMonth() + "/" + userForm.getDay()));
-
 
 			}
 			if (!(userDao.userIdCheck(userForm.getUserId()))) {
@@ -118,9 +115,6 @@ public class UserController {
 
 		if (!(CheckDate.checkDate(userForm.getYear() + "/" + userForm.getMonth() + "/" + userForm.getDay()))) {
 			request.setAttribute("birthdayError", "生年月日が不正です");
-			System.out.println(userForm.getYear() + "/" + userForm.getMonth() + "/" + userForm.getDay());
-			System.out.println(CheckDate.checkDate(userForm.getYear() + "/" + userForm.getMonth() + "/" + userForm.getDay()));
-
 			return "login/userRegister";
 		}
 
