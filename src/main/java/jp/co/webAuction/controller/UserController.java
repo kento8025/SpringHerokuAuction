@@ -21,7 +21,6 @@ import jp.co.webAuction.db.dto.User;
 import jp.co.webAuction.db.entity.FavoriteDao;
 import jp.co.webAuction.db.entity.MenuDao;
 import jp.co.webAuction.db.entity.UserDao;
-import jp.co.webAuction.tool.CheckDate;
 
 @Controller
 public class UserController {
@@ -100,10 +99,10 @@ public class UserController {
 
 		if (bindingResult.hasErrors()) {
 
-			if (!(CheckDate.checkDate(userForm.getYear() + "/" + userForm.getMonth() + "/" + userForm.getDay()))) {
+			/*if (!(CheckDate.checkDate(userForm.getYear() + "/" + userForm.getMonth() + "/" + userForm.getDay()))) {
 				request.setAttribute("birthdayError", "生年月日が不正です");
 
-			}
+			}*/
 			if (!(userDao.userIdCheck(userForm.getUserId()))) {
 				request.setAttribute("userIdError", "既に使用されています。");
 
@@ -113,10 +112,10 @@ public class UserController {
 		}
 
 
-		if (!(CheckDate.checkDate(userForm.getYear() + "/" + userForm.getMonth() + "/" + userForm.getDay()))) {
+		/*if (!(CheckDate.checkDate(userForm.getYear() + "/" + userForm.getMonth() + "/" + userForm.getDay()))) {
 			request.setAttribute("birthdayError", "生年月日が不正です");
 			return "login/userRegister";
-		}
+		}*/
 
 
 		if (!(userDao.userIdCheck(userForm.getUserId()))) {
