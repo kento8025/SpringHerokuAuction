@@ -59,7 +59,7 @@ public class PgMenuDao implements MenuDao {
 			"LEFT JOIN " +
 			"(SELECT count(*) as measurement , p.id  as secondid  FROM successful_bid as s " +
 			"LEFT JOIN product p ON s.product_id = p.id  " +
-			"WHERE 1 = 1 " +
+			"WHERE 1 = 1 AND s.trade_status = 1 " +
 			"GROUP BY s.product_id , p.id , p.product_name) " +
 			"sb2 " +
 			"ON sb1.id = sb2.secondid";
@@ -74,7 +74,7 @@ public class PgMenuDao implements MenuDao {
 			"FROM product as p  " +
 			"LEFT JOIN successful_bid s ON p.id = s.product_id  " +
 			"LEFT JOIN users u ON  u.id = s.user_id  " +
-			"WHERE 1 = 1  AND (trade_status IS NULL OR trade_status = 1) AND should_show = 1  \r\n" +
+			"WHERE 1 = 1  AND (trade_status IS NULL OR trade_status = 1 ) AND should_show = 1  " +
 			"GROUP BY  p.id , s.trade_status " +
 			") as sb3 " +
 			"ON sb2.secondid = sb3.id";
@@ -156,7 +156,7 @@ public class PgMenuDao implements MenuDao {
 
 		case "successfulDid":
 			sql += ""
-					+ " AND (trade_status IS NULL OR trade_status = 1) AND should_show = 1  AND s.user_id =:userId ";
+					+ " AND (trade_status IS NULL OR trade_status = 1 ) AND should_show = 1  AND s.user_id =:userId ";
 			break;
 
 		case "productSuccessfulDidHistory":
@@ -167,13 +167,13 @@ public class PgMenuDao implements MenuDao {
 
 		case "exhibition":
 			sql += ""
-					+ " AND p.should_show = 1 AND p.user_id =:userId AND (trade_status IS NULL OR trade_status = 1)";
+					+ " AND p.should_show = 1 AND p.user_id =:userId ";
 
 			break;
 
 		case "exhibitionHistory":
 			sql += ""
-					+ " AND p.should_show = 3 AND p.user_id = :userId AND trade_status = 3";
+					+ " AND p.should_show = 3 AND p.user_id = :userId AND (trade_status = 3 OR trade_status IS NULL ) ";
 
 			break;
 

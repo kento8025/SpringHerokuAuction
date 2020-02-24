@@ -33,6 +33,7 @@
 		width="200" height="80"></a>
 	<br>
 
+
 	<div id="inputInformation">
 
 	<form:form action="registration" modelAttribute="user">

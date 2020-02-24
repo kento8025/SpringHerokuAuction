@@ -10,17 +10,18 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import jp.co.webAuction.controller.form.TradeForm;
+import jp.co.webAuction.db.dto.Product;
 import jp.co.webAuction.db.dto.SuccessfulDid;
 import jp.co.webAuction.db.entity.TradeDao;
 
 @Repository
 public class PgTradeDao implements TradeDao {
 
-	@Autowired
-	NamedParameterJdbcTemplate jdbcTemplateError;
-
 	private final String INSERT_SUSCCEFUL_DID = "INSERT INTO successful_bid (product_id , user_id , contract_price , trade_status , trade_dete) "
 			+ "VALUES(:product_id , :user_id , :contract_price , :trade_status ,now())";
+
+	@Autowired
+	NamedParameterJdbcTemplate jdbcTemplate;
 
 	@Override
 	public void register(TradeForm tradeForm) {
@@ -32,7 +33,7 @@ public class PgTradeDao implements TradeDao {
 		param.addValue("contract_price", tradeForm.getContractPrice());
 		param.addValue("trade_status", 1);
 
-		jdbcTemplateError.update(INSERT_SUSCCEFUL_DID, param);
+		jdbcTemplate.update(INSERT_SUSCCEFUL_DID, param);
 
 	}
 
@@ -45,7 +46,7 @@ public class PgTradeDao implements TradeDao {
 
 		param.addValue("id", productId);
 
-		jdbcTemplateError.update(sql, param);
+		jdbcTemplate.update(sql, param);
 
 	}
 
@@ -58,8 +59,7 @@ public class PgTradeDao implements TradeDao {
 
 		param.addValue("id", id);
 
-		jdbcTemplateError.update(sql, param);
-
+		jdbcTemplate.update(sql, param);
 
 	}
 
@@ -70,15 +70,14 @@ public class PgTradeDao implements TradeDao {
 
 		String sql = "UPDATE Product SET should_show = 3  WHERE id = :productId  ";
 		param.addValue("productId", productId);
-		jdbcTemplateError.update(sql, param);
-
+		jdbcTemplate.update(sql, param);
 
 		sql = "SELECT *  FROM successful_bid  WHERE trade_status = 1 AND product_id = :productId  GROUP BY id ORDER BY contract_price DESC";
 		param.addValue("productId", productId);
 
-		List<SuccessfulDid> successfulDid =  new ArrayList<>();
+		List<SuccessfulDid> successfulDid = new ArrayList<>();
 
-		successfulDid = jdbcTemplateError.query(
+		successfulDid = jdbcTemplate.query(
 				sql,
 				param,
 				new BeanPropertyRowMapper<SuccessfulDid>(SuccessfulDid.class));
@@ -88,7 +87,62 @@ public class PgTradeDao implements TradeDao {
 		param.addValue("productId", productId);
 		param.addValue("tradeId", successfulDid.get(0).getId());
 
-		jdbcTemplateError.update(sql, param);
+		jdbcTemplate.update(sql, param);
+
+	}
+
+	@Override
+	public void productListUpdate() {
+
+		MapSqlParameterSource param = new MapSqlParameterSource();
+
+		String sql = "SELECT p.id  " +
+				"FROM product as p " +
+				"JOIN successful_bid s ON p.id = s.product_id  " +
+				"WHERE 1 = 1  AND (trade_status IS NULL OR trade_status = 1) AND should_show = 1 AND " +
+				"p.Registration_dete + CAST( exhibition_period  || ' day'  as interval) < now() " +
+				"GROUP BY  p.id , s.trade_status";
+
+		List<Product> productList = new ArrayList<>();
+
+		productList = jdbcTemplate.query(
+				sql,
+				param,
+				new BeanPropertyRowMapper<Product>(Product.class));
+
+
+		for (Product product : productList) {
+
+			System.out.println(product);
+
+			sql = "SELECT *  FROM successful_bid  WHERE trade_status = 1 AND product_id = :productId  GROUP BY id ORDER BY contract_price DESC";
+			param.addValue("productId", product.getId());
+
+			List<SuccessfulDid> successfulDid = new ArrayList<>();
+
+			successfulDid = jdbcTemplate.query(
+					sql,
+					param,
+					new BeanPropertyRowMapper<SuccessfulDid>(SuccessfulDid.class));
+
+			sql = "UPDATE successful_bid SET trade_status = 3 WHERE product_id = :productId AND id = :tradeId";
+
+			param.addValue("productId", product.getId());
+			param.addValue("tradeId", successfulDid.get(0).getId());
+			jdbcTemplate.update(sql, param);
+
+		}
+
+		sql = "UPDATE Product SET should_show = 3  WHERE id in ( " +
+				"SELECT p.id  " +
+				"FROM product as p " +
+				"LEFT JOIN successful_bid s ON p.id = s.product_id  " +
+				"WHERE 1 = 1 AND should_show = 1 AND " +
+				"p.Registration_dete +  CAST( exhibition_period  || ' day'  as interval) < now () " +
+				"GROUP BY  p.id , s.trade_status\r\n" +
+				" ) ";
+
+		jdbcTemplate.update(sql, param);
 
 	}
 
