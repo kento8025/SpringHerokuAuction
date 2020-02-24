@@ -62,8 +62,8 @@ public class Product {
 
 	public String getDescription() {
 
-		if (description.length() > 40) {
-			description = description.substring(0, 40) + "……";
+		if (description.length() > 20) {
+			description = description.substring(0, 20) + "……";
 		}
 		return description;
 	}
