@@ -259,7 +259,7 @@
 						</c:choose>
 
 
-						<c:forEach begin="1" end="${(requestScope.listnumber div 2)+1}"
+						<c:forEach begin="1" end="${(requestScope.listnumber div 4)+ pageadd}"
 							step="1" var="pageNo">
 
 
@@ -269,7 +269,7 @@
 
 						<c:choose>
 
-							<c:when test="${pageNo+1 < (requestScope.listnumber div 2)+1}">
+							<c:when test="${pageNo+1 < (requestScope.listnumber div 4)+ pageadd}">
 
 
 								<li class="Page"><a

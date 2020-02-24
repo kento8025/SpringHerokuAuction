@@ -74,6 +74,14 @@ public class SearchController {
 		request.setAttribute("listnumber", productListCount.size());
 		request.setAttribute("productName", productForm.getProductName());
 
+		if (productListCount.size() > 4) {
+			request.setAttribute("pageadd", 0);
+		} else if (productListCount.size() % 4 == 0) {
+			request.setAttribute("pageadd", 0);
+		} else {
+			request.setAttribute("pageadd", 1);
+		}
+
 		model.addAttribute("productList", productList);
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("product", productForm);
