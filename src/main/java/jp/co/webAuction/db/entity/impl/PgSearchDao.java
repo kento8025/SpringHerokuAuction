@@ -142,10 +142,10 @@ public class PgSearchDao implements SearchDao {
 
             sql += LIMT;
 
-            int ListSetCount = 2;
+            int ListSetCount = 4;
             //取得する件数
             param.addValue("NumberLines", ListSetCount);
-            //開始位置 1ページ目は0件から2件まで取得なので、ListSetCount*limt（ページ数-1）としておく
+            //開始位置 1ページ目は0件から4件まで取得なので、ListSetCount*limt（ページ数-1）としておく
             param.addValue("position", ListSetCount * (limt - 1));
 
         }
