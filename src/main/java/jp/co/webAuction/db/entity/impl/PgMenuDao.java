@@ -167,7 +167,7 @@ public class PgMenuDao implements MenuDao {
 
 		case "exhibition":
 			sql += ""
-					+ " AND p.should_show = 1 AND p.user_id =:userId ";
+					+ " AND p.should_show = 1 AND p.user_id =:userId AND (trade_status IS NULL OR trade_status = 1 ) ";
 
 			break;
 
