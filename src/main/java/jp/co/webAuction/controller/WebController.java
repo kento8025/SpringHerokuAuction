@@ -71,20 +71,20 @@ public class WebController {
 		return "home/homePage";
 	}
 
-	@RequestMapping("/error") // ƒGƒ‰[ƒy[ƒW‚Ö‚Ìƒ}ƒbƒsƒ“ƒO
+	@RequestMapping("/error") // ã‚¨ãƒ©ãƒ¼ãƒšãƒ¼ã‚¸ã¸ã®ãƒãƒƒãƒ”ãƒ³ã‚°
 	public ModelAndView error(HttpServletRequest req, ModelAndView mav) {
 
-		// ‚Ç‚ÌƒGƒ‰[‚Å‚à 404 Not Found ‚É‚·‚é
-		// •K—v‚É‰‚¶‚ÄƒXƒe[ƒ^ƒR[ƒh‚âo—Í“à—e‚ğƒJƒXƒ^ƒ}ƒCƒY‰Â”\
+		// ã©ã®ã‚¨ãƒ©ãƒ¼ã§ã‚‚ 404 Not Found ã«ã™ã‚‹
+		// å¿…è¦ã«å¿œã˜ã¦ã‚¹ãƒ†ãƒ¼ã‚¿ã‚³ãƒ¼ãƒ‰ã‚„å‡ºåŠ›å†…å®¹ã‚’ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚ºå¯èƒ½
 
-		//ƒGƒ‰[‚Ìw’è
+		//ã‚¨ãƒ©ãƒ¼ã®æŒ‡å®š
 		mav.setStatus(HttpStatus.NOT_FOUND);
 
-		// ƒrƒ…[–¼‚ğw’è‚·‚é
+		// ãƒ“ãƒ¥ãƒ¼åã‚’æŒ‡å®šã™ã‚‹
 		mav.setViewName("error");
 
-		req.setAttribute("errorMessage", "w’è‚³‚ê‚½ƒtƒ@ƒCƒ‹‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ<br>"
-				+ "URL‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢");
+		req.setAttribute("errorMessage", "æŒ‡å®šã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“<br>"
+				+ "URLã‚’ç¢ºèªã—ã¦ãã ã•ã„");
 
 		return mav;
 	}
