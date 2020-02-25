@@ -59,7 +59,7 @@ public class PgMenuDao implements MenuDao {
 			"LEFT JOIN " +
 			"(SELECT count(*) as measurement , p.id  as secondid  FROM successful_bid as s " +
 			"LEFT JOIN product p ON s.product_id = p.id  " +
-			"WHERE 1 = 1 AND s.trade_status = 1 " +
+			"WHERE 1 = 1  AND  (s.trade_status = 1 OR s.trade_status = 3) " +
 			"GROUP BY s.product_id , p.id , p.product_name) " +
 			"sb2 " +
 			"ON sb1.id = sb2.secondid";
