@@ -1,8 +1,8 @@
 package jp.co.webAuction.db.dto;
 
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class Product {
 
