@@ -18,292 +18,291 @@ import jp.co.webAuction.db.entity.SearchDao;
 @Repository
 public class PgSearchDao implements SearchDao {
 
-    @Autowired
-    private ProductDao productDao;
-
-    private final String SELECT = "SELECT * , COALESCE(measurement , 0 ) as count  FROM( ";
-
-    private final String SELECT_PRODUCT = " " +
-            "SELECT " +
-            "p.product_name , " +
-            "p.id , " +
-            "p.user_id , " +
-            "u.user_name , " +
-            "p.product_name , " +
-            "p.product_img , " +
-            "p.category_id , " +
-            "p.product_status , " +
-            "p.description  , " +
-            "p.postage , " +
-            "p.shipping_origin , " +
-            "p.shipping_method  , " +
-            "p.exhibition_period , " +
-            "p.should_show , " +
-            "p.Registration_dete , " +
-            "s.trade_status , " +
-            "";
-
-    private final String SELECT_FROM_PRODUCT_INFORMATION = "" +
-            "SELECT p.id as primaryProductId , " +
-            "p.user_id as primaryUserId , " +
-            "MAX (s.id) as trade , " +
-            "p.user_id as seller , " +
-            "s.user_id as buyer , " +
-            "u.user_name  , " +
-            "u.mail , " +
-            "p.product_name , " +
-            "p.product_img , " +
-            "p.category_id , " +
-            "p.product_status ,  " +
-            "p.description , " +
-            "p.postage , " +
-            "p.shipping_origin , " +
-            "p.shipping_method  , " +
-            "p.exhibition_period , " +
-            "p.should_show , " +
-            "p.Registration_dete ,  " +
-            "s.trade_status  ,";
-
-    private final String CASE = " " +
-            "CASE " +
-            "WHEN MAX(s.contract_price)  IS NULL THEN  MAX(p.price)  " +
-            "ELSE MAX(s.contract_price)  " +
-            "END AS price " +
-            "FROM product as p ";
-
-    private final String JOIN = " " +
-            "LEFT JOIN successful_bid s ON p.id = s.product_id  " +
-            "LEFT JOIN users u ON  u.id = p.user_id  " +
-            "LEFT JOIN category c ON  c.id = p.category_id  ";
-
-    private final String WHERE = " " +
-            "WHERE 1 = 1  " +
-            "AND (trade_status IS NULL OR trade_status = 1 )  AND should_show = 1 ";
-
-    private final String INFORMATION_WHERE = "" +
-            "WHERE p.id = :p.id  AND (trade_status IS NULL OR trade_status = 1 ) AND should_show = 1 ";
-
-    private final String GROUP_BY = " GROUP BY  p.id , s.trade_status , u.user_name  ";
-
-    private final String INFORMATION_GROUP_BY = " GROUP BY  p.id , s.trade_status , u.user_name , u.user_name , " +
-            "s.user_id , u.mail ";
-
-    private final String ORDER_BY = " ORDER BY p.id DESC ";
-
-    private final String INFORMATION_GROUP_ORDER_BY = " ORDER BY price DESC ";
-
-    private final String SBJOIN = "" +
-            ") sb1 " +
-            "LEFT JOIN " +
-            "(SELECT count(*) as measurement , p.id  as secondid  FROM successful_bid as s " +
-            "LEFT JOIN product p ON s.product_id = p.id  " +
-            "WHERE 1 = 1 AND p.should_show = 1 AND s.trade_status = 1  " +
-            "GROUP BY s.product_id , p.id , p.product_name) " +
-            "sb2 ";
-
-    private final String ON = " ON sb1.id = sb2.secondid ";
-
-    private final String INFORMATION_ON = " ON sb1.seller = sb2.secondid ";
-
-    private final String LIMT = "LIMIT :NumberLines OFFSET :position  ";
-
-    private int lowerPrice;
-    private int highPrice;
-
-    @Autowired
-    private NamedParameterJdbcTemplate jdbcTemplate;
-
-    /*検索フォームからの商品情報*/
-
-    @Override
-    public List<Product> productSearch(String productName, String category, String priceBetweenCommand,
-            String productStatus, Integer limt) {
-
-        MapSqlParameterSource param = new MapSqlParameterSource();
-
-        String sql = SELECT +
-                SELECT_PRODUCT +
-                CASE +
-                JOIN +
-                WHERE;
+	@Autowired
+	private ProductDao productDao;
+
+	private final String SELECT = "SELECT * , COALESCE(measurement , 0 ) as count  FROM( ";
+
+	private final String SELECT_PRODUCT = " " +
+			"SELECT " +
+			"p.product_name , " +
+			"p.id , " +
+			"p.user_id , " +
+			"u.user_name , " +
+			"p.product_name , " +
+			"p.product_img , " +
+			"p.category_id , " +
+			"p.product_status , " +
+			"p.description  , " +
+			"p.postage , " +
+			"p.shipping_origin , " +
+			"p.shipping_method  , " +
+			"p.exhibition_period , " +
+			"p.should_show , " +
+			"p.Registration_dete , " +
+			"s.trade_status , " +
+			"";
+
+	private final String SELECT_FROM_PRODUCT_INFORMATION = "" +
+			"SELECT p.id as primaryProductId , " +
+			"p.user_id as primaryUserId , " +
+			"MAX (s.id) as trade , " +
+			"p.user_id as seller , " +
+			"s.user_id as buyer , " +
+			"u.user_name  , " +
+			"u.mail , " +
+			"p.product_name , " +
+			"p.product_img , " +
+			"p.category_id , " +
+			"p.product_status ,  " +
+			"p.description , " +
+			"p.postage , " +
+			"p.shipping_origin , " +
+			"p.shipping_method  , " +
+			"p.exhibition_period , " +
+			"p.should_show , " +
+			"p.Registration_dete ,  " +
+			"s.trade_status  ,";
+
+	private final String CASE = " " +
+			"CASE " +
+			"WHEN trade_status = 1 THEN MAX(s.contract_price) " +
+			"WHEN MAX(s.contract_price)  IS NULL THEN  p.price  " +
+			"ELSE p.price " +
+			"END AS price " +
+			"FROM product as p ";
+
+	private final String JOIN = " " +
+			"LEFT JOIN successful_bid s ON p.id = s.product_id " +
+			"AND  trade_status = 1 " +
+			"LEFT JOIN users u ON  u.id = p.user_id  " +
+			"LEFT JOIN category c ON  c.id = p.category_id  ";
+
+	private final String WHERE = " " +
+			"WHERE 1 = 1  " +
+			"AND  should_show = 1 ";
+
+	private final String INFORMATION_WHERE = "" +
+			"WHERE 1 = 1 AND p.id = :p.id  AND should_show = 1 ";
+
+	private final String GROUP_BY = " GROUP BY  p.id , s.trade_status , u.user_name  ";
+
+	private final String INFORMATION_GROUP_BY = " GROUP BY  p.id , s.trade_status , u.user_name , u.user_name , " +
+			"s.user_id , u.mail ";
+
+	private final String ORDER_BY = " ORDER BY p.id DESC ";
+
+	private final String INFORMATION_GROUP_ORDER_BY = " ORDER BY price DESC ";
+
+	private final String SBJOIN = "" +
+			") sb1 " +
+			"LEFT JOIN " +
+			"(SELECT count(*) as measurement , p.id  as secondid  FROM successful_bid as s " +
+			"LEFT JOIN product p ON s.product_id = p.id  " +
+			"WHERE 1 = 1 AND p.should_show = 1 AND s.trade_status = 1  " +
+			"GROUP BY s.product_id , p.id , p.product_name) " +
+			"sb2 ";
+
+	private final String ON = " ON sb1.id = sb2.secondid  ";
+
+	//private final String INFORMATION_ON = " ON sb1.seller = sb2.secondid ";
+
+	private final String LIMT = "LIMIT :NumberLines OFFSET :position  ";
+
+	private int lowerPrice;
+	private int highPrice;
+
+	@Autowired
+	private NamedParameterJdbcTemplate jdbcTemplate;
+
+	/*検索フォームからの商品情報*/
+
+	@Override
+	public List<Product> productSearch(String productName, String category, String priceBetweenCommand,
+			String productStatus, Integer limt) {
+
+		MapSqlParameterSource param = new MapSqlParameterSource();
+
+		String sql = SELECT +
+				SELECT_PRODUCT +
+				CASE +
+				JOIN +
+				WHERE;
+
+		sql += whereSet(productName, category, priceBetweenCommand, productStatus);
 
-        sql += whereSet(productName, category, priceBetweenCommand, productStatus);
-
-        sql += GROUP_BY +
-                ORDER_BY +
-                SBJOIN +
-                ON;
-        param.addValue("product_name", "%" + productName + "%");
-        param.addValue("categoryId", productDao.categorySearch(category));
-        param.addValue("lowerPrice", lowerPrice);
-        param.addValue("highPrice", highPrice);
-        param.addValue("productStatus", productStatus);
+		sql += GROUP_BY +
+				ORDER_BY +
+				SBJOIN +
+				ON;
+		param.addValue("product_name", "%" + productName + "%");
+		param.addValue("categoryId", productDao.categorySearch(category));
+		param.addValue("lowerPrice", lowerPrice);
+		param.addValue("highPrice", highPrice);
+		param.addValue("productStatus", productStatus);
 
-        if (!(limt == null)) {
+		if (!(limt == null)) {
 
-            sql += LIMT;
+			sql += LIMT;
+
+			int ListSetCount = 4;
+			//取得する件数
+			param.addValue("NumberLines", ListSetCount);
+			//開始位置 1ページ目は0件から4件まで取得なので、ListSetCount*limt（ページ数-1）としておく
+			param.addValue("position", ListSetCount * (limt - 1));
 
-            int ListSetCount = 4;
-            //取得する件数
-            param.addValue("NumberLines", ListSetCount);
-            //開始位置 1ページ目は0件から4件まで取得なので、ListSetCount*limt（ページ数-1）としておく
-            param.addValue("position", ListSetCount * (limt - 1));
-
-        }
-
-        return jdbcTemplate.query(
-                sql,
-                param,
-                new BeanPropertyRowMapper<Product>(Product.class));
-
-    }
-
-    /*商品画像クリックの情報検索*/
-    @Override
-    public PurchaseDisplay productInformation(int productId) {
-
-        MapSqlParameterSource param = new MapSqlParameterSource();
-        List<PurchaseDisplay> purchaseDisplay = new ArrayList<>();
-        List<SuccessfulDidCount> successfulDidCount = new ArrayList<>();
-
-        String sql = SELECT +
-                SELECT_FROM_PRODUCT_INFORMATION +
-                CASE +
-                JOIN +
-                INFORMATION_WHERE +
-                INFORMATION_GROUP_BY +
-                INFORMATION_GROUP_ORDER_BY +
-                SBJOIN +
-                INFORMATION_ON;
+		}
+
+		return jdbcTemplate.query(
+				sql,
+				param,
+				new BeanPropertyRowMapper<Product>(Product.class));
+
+	}
+
+	/*商品画像クリックの情報検索*/
+	@Override
+	public PurchaseDisplay productInformation(int productId) {
+
+		MapSqlParameterSource param = new MapSqlParameterSource();
+		List<PurchaseDisplay> purchaseDisplay = new ArrayList<>();
+		List<SuccessfulDidCount> successfulDidCount = new ArrayList<>();
+
+		String sql = SELECT_FROM_PRODUCT_INFORMATION +
+				CASE +
+				JOIN +
+				INFORMATION_WHERE +
+				INFORMATION_GROUP_BY +
+				INFORMATION_GROUP_ORDER_BY;
 
-        String sql2 = "" +
-                "SELECT count(*) as count , p.id , p.product_name  FROM successful_bid as s " +
-                "LEFT JOIN product p ON s.product_id = p.id " +
-                "WHERE 1 = 1 AND p.should_show = 1 AND s.trade_status = 1 AND p.id =:p.id " +
-                "GROUP BY s.product_id , p.id , p.product_name ";
+		String sql2 = "" +
+				"SELECT count(*) as count , p.id , p.product_name  FROM successful_bid as s " +
+				"LEFT JOIN product p ON s.product_id = p.id " +
+				"WHERE 1 = 1 AND p.should_show = 1 AND s.trade_status = 1 AND p.id =:p.id " +
+				"GROUP BY s.product_id , p.id , p.product_name ";
 
-        param.addValue("p.id", productId);
+		param.addValue("p.id", productId);
 
-        purchaseDisplay = jdbcTemplate.query(
-                sql,
-                param,
-                new BeanPropertyRowMapper<PurchaseDisplay>(PurchaseDisplay.class));
+		purchaseDisplay = jdbcTemplate.query(
+				sql,
+				param,
+				new BeanPropertyRowMapper<PurchaseDisplay>(PurchaseDisplay.class));
 
-        successfulDidCount = jdbcTemplate.query(
-                sql2,
-                param,
-                new BeanPropertyRowMapper<SuccessfulDidCount>(SuccessfulDidCount.class));
+		successfulDidCount = jdbcTemplate.query(
+				sql2,
+				param,
+				new BeanPropertyRowMapper<SuccessfulDidCount>(SuccessfulDidCount.class));
 
-        if (!(successfulDidCount.size() == 0)) {
-            purchaseDisplay.get(purchaseDisplay.size() - 1).setCount(successfulDidCount.get(0).getCount());
-        }
+		if (!(successfulDidCount.size() == 0)) {
+			purchaseDisplay.get(0).setCount(successfulDidCount.get(0).getCount());
+		}
 
-        return purchaseDisplay.get(purchaseDisplay.size() - 1);
+		return purchaseDisplay.get(0);
 
-    }
+	}
 
-    /*入札回数カウント*/
-    public List<SuccessfulDidCount> successfulDidCountSearch(String productName, String category,
-            String priceBetweenCommand,
-            String productStatus,
-            Integer limt) {
+	/*入札回数カウント*/
+	public List<SuccessfulDidCount> successfulDidCountSearch(String productName, String category,
+			String priceBetweenCommand,
+			String productStatus,
+			Integer limt) {
 
-        MapSqlParameterSource param = new MapSqlParameterSource();
+		MapSqlParameterSource param = new MapSqlParameterSource();
 
-        String sql = "" +
-                "SELECT count(*) , s.product_id  FROM successful_bid as s  " +
-                "LEFT JOIN product p ON s.product_id = p.id  " +
-                "LEFT JOIN category c ON  c.id = p.category_id " +
-                "WHERE 1 = 1 AND p.should_show != 3 AND s.trade_status = 1  ";
+		String sql = "" +
+				"SELECT count(*) , s.product_id  FROM successful_bid as s  " +
+				"LEFT JOIN product p ON s.product_id = p.id  " +
+				"LEFT JOIN category c ON  c.id = p.category_id " +
+				"WHERE 1 = 1 AND p.should_show != 3 AND s.trade_status = 1  ";
 
-        sql += whereSet(productName, category, priceBetweenCommand, productStatus);
+		sql += whereSet(productName, category, priceBetweenCommand, productStatus);
 
-        param.addValue("product_name", "%" + productName + "%");
-        param.addValue("categoryId", productDao.categorySearch(category));
-        param.addValue("lowerPrice", lowerPrice);
-        param.addValue("highPrice", highPrice);
-        param.addValue("productStatus", productStatus);
+		param.addValue("product_name", "%" + productName + "%");
+		param.addValue("categoryId", productDao.categorySearch(category));
+		param.addValue("lowerPrice", lowerPrice);
+		param.addValue("highPrice", highPrice);
+		param.addValue("productStatus", productStatus);
 
-        sql += " GROUP BY  s.product_id , p.id " + ORDER_BY;
+		sql += " GROUP BY  s.product_id , p.id " + ORDER_BY;
 
-        return jdbcTemplate.query(
-                sql,
-                param,
-                new BeanPropertyRowMapper<SuccessfulDidCount>(SuccessfulDidCount.class));
+		return jdbcTemplate.query(
+				sql,
+				param,
+				new BeanPropertyRowMapper<SuccessfulDidCount>(SuccessfulDidCount.class));
 
-    }
+	}
 
-    /*値段を指定*/
-    private void priceBetween(String priceBetweenCommand) {
+	/*値段を指定*/
+	private void priceBetween(String priceBetweenCommand) {
 
-        if (priceBetweenCommand == null || priceBetweenCommand.equals("none")) {
-            return;
-        }
+		if (priceBetweenCommand == null || priceBetweenCommand.equals("none")) {
+			return;
+		}
 
-        switch (priceBetweenCommand) {
-        case "1":
-            lowerPrice = 0;
-            highPrice = 1000;
-            break;
+		switch (priceBetweenCommand) {
+		case "1":
+			lowerPrice = 0;
+			highPrice = 1000;
+			break;
 
-        case "2":
-            lowerPrice = 1000;
-            highPrice = 5000;
-            break;
+		case "2":
+			lowerPrice = 1000;
+			highPrice = 5000;
+			break;
 
-        case "3":
-            lowerPrice = 5000;
-            highPrice = 10000;
-            break;
+		case "3":
+			lowerPrice = 5000;
+			highPrice = 10000;
+			break;
 
-        case "4":
-            lowerPrice = 10000;
-            highPrice = 99999999;
-            break;
-        }
+		case "4":
+			lowerPrice = 10000;
+			highPrice = 99999999;
+			break;
+		}
 
-    }
+	}
 
-    /*WHERE文作成*/
-    private String whereSet(String productName, String category, String priceBetweenCommand, String productStatus) {
+	/*WHERE文作成*/
+	private String whereSet(String productName, String category, String priceBetweenCommand, String productStatus) {
 
-        String sql = "";
+		String sql = "";
 
-        priceBetween(priceBetweenCommand);
+		priceBetween(priceBetweenCommand);
 
-        if (!(productName == null) && !(productName.isEmpty())) {
+		if (!(productName == null) && !(productName.isEmpty())) {
 
-            sql += " AND p.product_name LIKE :product_name ";
+			sql += " AND p.product_name LIKE :product_name ";
 
-        }
+		}
 
-        if (!(category == null) && !(category.isEmpty())) {
+		if (!(category == null) && !(category.isEmpty())) {
 
-            sql += " AND category_id = :categoryId ";
+			sql += " AND category_id = :categoryId ";
 
-        }
+		}
 
-        if (!(priceBetweenCommand == null) && !(priceBetweenCommand.isEmpty())) {
+		if (!(priceBetweenCommand == null) && !(priceBetweenCommand.isEmpty())) {
 
-            if (!(priceBetweenCommand.equals("none"))) {
+			if (!(priceBetweenCommand.equals("none"))) {
 
-                sql += " AND p.price BETWEEN :lowerPrice AND :highPrice ";
+				sql += " AND p.price BETWEEN :lowerPrice AND :highPrice ";
 
-            }
-        }
+			}
+		}
 
-        if (!(productStatus == null) && !(productStatus.isEmpty())) {
+		if (!(productStatus == null) && !(productStatus.isEmpty())) {
 
-            if (!(productStatus.equals("none"))) {
+			if (!(productStatus.equals("none"))) {
 
-                sql += " AND p.product_status = :productStatus ";
+				sql += " AND p.product_status = :productStatus ";
 
-            }
+			}
 
-        }
+		}
 
-        return sql;
+		return sql;
 
-    }
+	}
 
 }

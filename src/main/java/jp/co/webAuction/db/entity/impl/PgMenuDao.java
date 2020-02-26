@@ -46,8 +46,8 @@ public class PgMenuDao implements MenuDao {
 			"FROM product as p ";
 
 	private final String JOIN = " " +
-			"LEFT JOIN successful_bid s ON p.id = s.product_id  " +
-			"LEFT JOIN category c ON  c.id = p.category_id  ";
+			"LEFT JOIN category c ON  c.id = p.category_id  "+
+			"LEFT JOIN successful_bid s ON p.id = s.product_id  " ;
 
 	private final String WHERE = " " +
 			"WHERE 1 = 1  ";
@@ -59,7 +59,7 @@ public class PgMenuDao implements MenuDao {
 			"LEFT JOIN " +
 			"(SELECT count(*) as measurement , p.id  as secondid  FROM successful_bid as s " +
 			"LEFT JOIN product p ON s.product_id = p.id  " +
-			"WHERE 1 = 1  AND  (s.trade_status = 1 OR s.trade_status = 3) " +
+			"WHERE 1 = 1 AND (s.trade_status = 1 OR s.trade_status = 3) " +
 			"GROUP BY s.product_id , p.id , p.product_name) " +
 			"sb2 " +
 			"ON sb1.id = sb2.secondid";
@@ -167,7 +167,7 @@ public class PgMenuDao implements MenuDao {
 
 		case "exhibition":
 			sql += ""
-					+ " AND p.should_show = 1 AND p.user_id =:userId AND (trade_status IS NULL OR trade_status = 1 ) ";
+					+ " AND p.should_show = 1 AND p.user_id =:userId ";
 
 			break;
 
@@ -205,7 +205,7 @@ public class PgMenuDao implements MenuDao {
 
 		case "exhibition":
 			sql += ""
-					+ " LEFT JOIN users u ON  u.id = p.user_id  ";
+					+ " AND  trade_status = 1  LEFT JOIN users u ON  u.id = p.user_id  ";
 			break;
 
 		case "exhibitionHistory":
